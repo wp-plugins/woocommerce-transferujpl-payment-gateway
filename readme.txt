@@ -5,6 +5,7 @@ Tags: woocommerce, transferuj, payment, polish gateway, polska brama płatności
 Requires at least: 3.0.1
 Tested up to: 3.4
 Stable tag: 0.1
+License: GPLv2 
 
 Accept all major polish bank accounts directly on your WooCommerce site via transferuj.pl system.
 
@@ -19,14 +20,36 @@ Mamy najniższe prowizje i największą liczbę dostępnych kanałów płatnośc
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+= WYMAGANIA =
 
-e.g.
+Aby korzystać z płatności Transferuj.pl w platformie Woocommerce 
+niezbędne jest: 
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Posiadać konto w systemie Transferuj.pl 
+
+2. Ustawić "Kod bezpieczeństwa (potwierdzający)" w panelu Odbiorcy 
+Transferuj.pl, jeśli nie jest ustawiony. Dla kont zarejestrowanych po 
+2012 powinna być już wprowadzona systemowo losowa wartość. 
+
+3. Pobrać pliki instalacyjne modułu
 
 
+= INSTALACJA MODUŁU =
 
-`<?php code(); // goes in backticks ?>`
+1. Rozpakuj zawartość archiwum na dysk. Po rozpakowaniu powinien 
+powstać folder „woocommerce”. 
+
+2. Wyślij plik class-wc-payment-transferuj.php do katalogu wp-content-plugins znajdującej się w Twojej instalacji Wordpress.
+
+3. Przejdź do panelu administracyjnego i otwórz zakładkę "Plugins". Kliknij „Activate” przy pozycji „Transferuj.pl” 
+
+4. Przejdź do WooCommerce ->Settings i wybierz zakładkę „Payment Gateways” po czym z poziomej listy bramek wybierz Transferuj.pl i uzupełnij formularz swoimi danymi i zapisz zmiany klikając „Savechanges”.
+
+WAŻNE – kod Bezpieczeństwa potwierdzający musi być IDENTYCZNY jak wpisany w Panelu Odbiorcy w Transferuj.pl (Menu->Ustawienia-> Powiadomienia->kod bezpieczeństwa potwierdzający). 
+
+5. Od teraz Twoi klienci będą mogli dokonywać szybkich płatności online przez system Transferuj.pl 
+
+
+= KONTAKT =
+
+W razie potrzeby odpowiedzi na pytania powstałe podczas lektury lub szczegółowe wyjaśnienie kwestii technicznych prosimy o kontakt poprzez formularz znajdujący się w Panelu Odbiorcy lub na adres e-mail: pt@transferuj.pl 
