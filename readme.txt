@@ -7,7 +7,7 @@ Tested up to: 3.4
 Stable tag: 0.1
 License: GPLv2 
 
-Accept all major polish bank accounts directly on your WooCommerce site via transferuj.pl system.
+Accept payments from all major polish banks directly on your WooCommerce site via transferuj.pl polish payment gateway system.
 
 == Description ==
 
