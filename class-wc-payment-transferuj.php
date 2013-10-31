@@ -12,7 +12,7 @@
  * Author URI: http://www.transferuj.pl
  * Version: 0.1	
  */
- */
+ 
 
 // load plugin
 add_action('plugins_loaded', 'init_transferuj_gateway');
