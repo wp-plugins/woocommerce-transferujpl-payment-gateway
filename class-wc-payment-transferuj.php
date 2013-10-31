@@ -1,14 +1,17 @@
 <?php
 /**
+/**
  * Transferuj.pl Woocommerce payment module
  *
  * @author Transferuj.pl
  *
- * Plugin Name: Transferuj.pl
+ * Plugin Name: Transferuj.pl Woocommerce payment module
  * Plugin URI: http://www.transferuj.pl
  * Description: Brama płatności Transferuj.pl do WooCommerce.
  * Author: Transferuj.pl
  * Author URI: http://www.transferuj.pl
+ * Version: 0.1	
+ */
  */
 
 // load plugin
