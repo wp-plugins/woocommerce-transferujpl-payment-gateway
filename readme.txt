@@ -11,7 +11,10 @@ Accept payments from all major polish banks directly on your WooCommerce site vi
 
 == Description ==
 
-Nowoczesny system płatności online
+Brama płatności dla pluginu Woocommerce.
+
+Nowoczesny system płatności online.
+
 Dzięki nam płatności elektroniczne w Internecie są całkowicie bezpieczne.
 
 Zapewniamy szybkie przelewy internetowe, dzięki którym łatwo dokonasz płatności on-line za zakupione przez Internet towary
@@ -27,11 +30,13 @@ niezbędne jest:
 
 1. Posiadać konto w systemie Transferuj.pl 
 
-2. Ustawić "Kod bezpieczeństwa (potwierdzający)" w panelu Odbiorcy 
+2. Posiadać zainstalowany plugin woocommerce (http://wordpress.org/plugins/woocommerce/)
+
+3. Ustawić "Kod bezpieczeństwa (potwierdzający)" w panelu Odbiorcy 
 Transferuj.pl, jeśli nie jest ustawiony. Dla kont zarejestrowanych po 
 2012 powinna być już wprowadzona systemowo losowa wartość. 
 
-3. Pobrać pliki instalacyjne modułu
+4. Pobrać pliki instalacyjne modułu
 
 
 = INSTALACJA MODUŁU =
