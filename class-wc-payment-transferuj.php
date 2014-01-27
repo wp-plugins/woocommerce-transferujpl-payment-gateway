@@ -10,7 +10,7 @@
  * Description: Brama płatności Transferuj.pl do WooCommerce.
  * Author: Transferuj.pl
  * Author URI: http://www.transferuj.pl
- * Version: 0.2	
+ * Version: 0.3	
  */
 // load plugin
 add_action('plugins_loaded', 'init_transferuj_gateway');
@@ -157,9 +157,9 @@ FORM;
                  'default' => __('Zapłać przez Transferuj.pl.', 'woocommerce')
              ),
              'seller_id' => array(
-                 'title' => __('Kod sprzedawcy', 'woocommerce'),
+                 'title' => __('ID sprzedawcy', 'woocommerce'),
                  'type' => 'text',
-                 'description' => __('Twój kod sprzedawcy na Transferuj.pl.', 'woocommerce'),
+                 'description' => __('Twoje ID sprzedawcy w systemie Transferuj.pl. Liczba co najmniej czterocyfrowa (może być pięciocyfowa), np. 12345', 'woocommerce'),
                  'default' => __('0', 'woocommerce'),
                  'desc_tip' => true,
              ),
