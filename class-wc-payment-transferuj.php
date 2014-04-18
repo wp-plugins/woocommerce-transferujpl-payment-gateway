@@ -299,8 +299,8 @@ FORM;
          $data['kod'] = $order->billing_postcode;
          $data['telefon'] = $order->billing_phone;
          $data['md5sum'] = md5($data['seller_id'] . $data['kwota'] . $data['crc'] . $data['security_code']);
-         $data['pow_url'] = add_query_arg('key', $order->order_key, add_query_arg('order', $order->id, get_permalink(woocommerce_get_page_id('thanks'))));
-         $data['pow_url_blad'] = add_query_arg('key', $order->order_key, add_query_arg('order', $order->id, get_permalink(woocommerce_get_page_id('thanks'))));
+         $data['pow_url'] = esc_url( add_query_arg( 'utm_nooverride', '1', $this->get_return_url( $order ) ) );
+         $data['pow_url_blad'] = esc_url( $order->get_cancel_order_url() );
          $data['wyn_url'] = $this->notify_link;
 
          if (strcmp(get_locale(), "pl_PL") == 0) {
