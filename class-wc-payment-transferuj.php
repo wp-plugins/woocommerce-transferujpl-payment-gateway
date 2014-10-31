@@ -10,7 +10,7 @@
  * Description: Brama płatności Transferuj.pl do WooCommerce.
  * Author: Transferuj.pl
  * Author URI: http://www.transferuj.pl
- * Version: 0.3	
+ * Version: 0.5	
  */
 // load plugin
 add_action('plugins_loaded', 'init_transferuj_gateway');
@@ -236,7 +236,7 @@ FORM;
             if ($overpay) {
                $order->update_status('processing', __('Zapłacono z nadpłatą.'));
             } else {
-               $order->update_status('processing', __('Zapłacono.'));
+               $order->payment_complete();
             }
          } else if ($status == 'failure') {
             $order->update_status('failed', __('Zapłata nie powiodła się.'));
