@@ -4,7 +4,7 @@ Donate link: http://transferuj.pl/
 Tags: woocommerce, transferuj, payment, polish gateway, polska brama płatności
 Requires at least: 3.0.1
 Tested up to: 4.0
-Stable tag: 0.5
+Stable tag: 0.6
 License: GPLv2 
 Accept payments from all major polish banks directly on your WooCommerce site via transferuj.pl polish payment gateway system.
 
@@ -51,6 +51,10 @@ powstać folder „woocommerce”.
 WAŻNE – kod Bezpieczeństwa potwierdzający musi być IDENTYCZNY jak wpisany w Panelu Odbiorcy w Transferuj.pl (Menu->Ustawienia-> Powiadomienia->kod bezpieczeństwa potwierdzający). 
 
 5. Od teraz Twoi klienci będą mogli dokonywać szybkich płatności online przez system Transferuj.pl 
+
+= Testy =
+
+Przetestowany z Woocommerce 2.2, Wordpress 4.0
 
 
 = KONTAKT =

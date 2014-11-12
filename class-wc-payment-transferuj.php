@@ -10,14 +10,18 @@
  * Description: Brama płatności Transferuj.pl do WooCommerce.
  * Author: Transferuj.pl
  * Author URI: http://www.transferuj.pl
- * Version: 0.5	
+ * Version: 0.6	
  */
 // load plugin
 add_action('plugins_loaded', 'init_transferuj_gateway');
 
 function init_transferuj_gateway() {
+   
+   if ( !class_exists( 'WC_Payment_Gateway' ) ) return;
 
    class WC_Gateway_Transferuj extends WC_Payment_Gateway {
+      
+      
 
       /**
        * Constructor for the gateway.
