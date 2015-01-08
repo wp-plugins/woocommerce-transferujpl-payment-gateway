@@ -12,13 +12,17 @@ Accept payments from all major polish banks directly on your WooCommerce site vi
 
 Brama płatności dla pluginu Woocommerce.
 
-Nowoczesny system płatności online.
+Transferuj.pl to system szybkich płatności online należący do spółki Krajowy Integrator Płatności SA. Misją przedsiębiorstwa jest wprowadzanie oraz propagowanie nowatorskich metod płatności i rozwiązań płatniczych zapewniających maksymalną szybkość i bezpieczeństwo dokonywanych transakcji.
 
-Dzięki nam płatności elektroniczne w Internecie są całkowicie bezpieczne.
+Jako lider technologiczny, Transferuj.pl oferują największą liczbę metod płatności na rynku. W ofercie ponad 50 sposobów zapłaty znajdą Państwo m.in. największy wybór e-transferów, Zintegrowaną Bramkę Płatności Kartami, mobilną galerię handlową RockPay oraz narzędzie do zbiórek pieniężnych w sieci – serwis eHat.me. Dodatkowe funkcjonalności systemu obejmują pełen design w RWD, przelewy masowe oraz udostępnione biblioteki mobilne i dodatki do przeglądarek automatyzujące przelewy. Transferuj.pl oferuje również płatności odroczone, raty online Premium SMS oraz płatność za pomocą kodu QR.
 
-Zapewniamy szybkie przelewy internetowe, dzięki którym łatwo dokonasz płatności on-line za zakupione przez Internet towary
+Transferuj.pl zapewnia najwyższy poziom bezpieczeństwa potwierdzony certyfikatem PCI DSS Level 1. System gwarantuje wygodę oraz możliwość natychmiastowej realizacji zamówienia. Oferta handlowa Transferuj.pl jest dokładnie dopasowana do Twoich potrzeb.
 
-Mamy najniższe prowizje i największą liczbę dostępnych kanałów płatności na rynku!
+Transferuj.pl Online Payment System belongs to Krajowy Integrator Płatności Inc. The company’s mission is to introduce and promote innovative payment methods and solutions ensuring maximum speed and safety of online transactions.
+
+As technological leader, Transferuj.pl offers the largest number of payment methods on market. Among over 50 ways of finalizing transactions you will find the widest choice of direct online payments, Integrated Card Payment Gate, mobile shopping center – RockPay and group payments tool – eHat.me. Additional features include: RWD design, mass pay-outs, mobile libraries and payment automation application. You can also pay using postponed payment, online installments, Premium SMS and QR code payment.
+
+The highest level of security of payments processed by Transferuj.pl is verified by PCI DSS Level 1 certificate. System guarantees convenience and instant order execution. Our business offer is flexible and prepared according to your needs.
 
 == Installation ==
 
@@ -29,7 +33,7 @@ niezbędne jest:
 
 1. Posiadać konto w systemie Transferuj.pl 
 
-2. Posiadać zainstalowany plugin woocommerce (http://wordpress.org/plugins/woocommerce/). Przetestowana dla woocommerce 2.1.5
+2. Posiadać zainstalowany plugin woocommerce (http://wordpress.org/plugins/woocommerce/). Przetestowana dla woocommerce 2.2.10
 
 3. Ustawić "Kod bezpieczeństwa (potwierdzający)" w panelu Odbiorcy 
 Transferuj.pl, jeśli nie jest ustawiony. Dla kont zarejestrowanych po 

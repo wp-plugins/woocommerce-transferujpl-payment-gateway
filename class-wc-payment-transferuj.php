@@ -10,7 +10,7 @@
  * Description: Brama płatności Transferuj.pl do WooCommerce.
  * Author: Transferuj.pl
  * Author URI: http://www.transferuj.pl
- * Version: 0.6	
+ * Version: 0.7	
  */
 // load plugin
 add_action('plugins_loaded', 'init_transferuj_gateway');
@@ -70,7 +70,7 @@ function init_transferuj_gateway() {
 			
             <div id="descriptionBox">{$this->description}</div> <br/>
             <div id="termsCheckboxBox">
-                <input type="checkbox" id="termsCheckbox" name="terms">
+                <input type="checkbox" id="termsCheckbox" name="terms_t">
                     <a href="https://transferuj.pl/regulamin.pdf" target="blank">
                                 Akceptuje warunki regulaminu korzystania z serwisu Transferuj.pl
                     </a>
@@ -102,7 +102,7 @@ FORM;
 			
             <div id="descriptionBox">{$this->description}</div> <br/>
             <div id="termsCheckboxBox">
-                <input type="checkbox" id="termsCheckbox" name="terms">
+                <input type="checkbox" id="termsCheckbox" name="terms_t">
                     <a href="https://transferuj.pl/regulamin.pdf" target="blank">
                                 Akceptuje warunki regulaminu korzystania z serwisu Transferuj.pl
                     </a>
@@ -264,7 +264,7 @@ FORM;
          // Post data and redirect to Transferuj.pl
          return array(
              'result' => 'success',
-             'redirect' => add_query_arg(array('terms' => $_POST['terms'], 'order_id' => $order_id, 'channel' => $_POST['channel']), $this->notify_link)
+             'redirect' => add_query_arg(array('terms_t' => $_POST['terms_t'], 'order_id' => $order_id, 'channel' => $_POST['channel']), $this->notify_link)
          );
       }
 
@@ -323,10 +323,10 @@ FORM;
          // }
 
          $termsInput = "";
-         if (isset($_GET['terms'])) {
-            $data['terms'] = $_GET['terms'];
-            if ($data['terms'] == 'on') {
-               $termsInput = '<input type="hidden" name="akceptuje_regulamin" value="' . $data['terms'] . '"/>';
+         if (isset($_GET['terms_t'])) {
+            $data['terms_t'] = $_GET['terms_t'];
+            if ($data['terms_t'] == 'on') {
+               $termsInput = '<input type="hidden" name="akceptuje_regulamin" value="' . $data['terms_t'] . '"/>';
             }
          }
 
