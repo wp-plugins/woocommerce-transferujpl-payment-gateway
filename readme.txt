@@ -3,8 +3,8 @@ Contributors: transferuj.pl
 Donate link: http://transferuj.pl/
 Tags: woocommerce, transferuj, payment, polish gateway, polska brama płatności
 Requires at least: 3.0.1
-Tested up to: 4.0
-Stable tag: 0.6
+Tested up to: 4.1
+Stable tag: 1.0
 License: GPLv2 
 Accept payments from all major polish banks directly on your WooCommerce site via transferuj.pl polish payment gateway system.
 
@@ -24,41 +24,57 @@ As technological leader, Transferuj.pl offers the largest number of payment meth
 
 The highest level of security of payments processed by Transferuj.pl is verified by PCI DSS Level 1 certificate. System guarantees convenience and instant order execution. Our business offer is flexible and prepared according to your needs.
 
+
 == Installation ==
 
 = WYMAGANIA =
 
-Aby korzystać z płatności Transferuj.pl w platformie Woocommerce 
-niezbędne jest: 
+Aby korzystać z płatności Transferuj.pl w platformie Woocommerce niezbędne jest:
 
-1. Posiadać konto w systemie Transferuj.pl 
+a)	Posiadanie konta w systemie Transferuj.pl
+b)	Aktywna wtyczka WooCommerce dla Wordpressa. 
+c)	Pobranie plików instalacyjnych modułu z katalogu wtyczek Wordpress:
 
-2. Posiadać zainstalowany plugin woocommerce (http://wordpress.org/plugins/woocommerce/). Przetestowana dla woocommerce 2.2.10
 
-3. Ustawić "Kod bezpieczeństwa (potwierdzający)" w panelu Odbiorcy 
-Transferuj.pl, jeśli nie jest ustawiony. Dla kont zarejestrowanych po 
-2012 powinna być już wprowadzona systemowo losowa wartość. 
-
-4. Pobrać pliki instalacyjne modułu
 
 = INSTALACJA MODUŁU =
 
-1. Rozpakuj zawartość archiwum na dysk. Po rozpakowaniu powinien 
-powstać folder „woocommerce”. 
+Instalacja autmatyczna 
+a)	Przejdź do menu „Wtyczki” następnie „Dodaj nową” i w miejscu „Szukaj wtyczek”  wyszukaj „Transferuj”
+b)	W „Wynikach wyszukiwania” pojawi się moduł płatności Transferuj, który należy zainstalować. 
+ 
 
-2. Wyślij plik class-wc-payment-transferuj.php do katalogu wp-content-plugins znajdującej się w Twojej instalacji Wordpress.
+Instalacja ręczna 
+a)	Rozpakuj zawartość archiwum na dysk. Po rozpakowaniu powinien powstać folder „woocommerce_transferuj”.
+b)	Wyślij cały folder  do katalogu wp-content/plugins znajdującego się w Twojej instalacji Wordpress.
 
-3. Przejdź do panelu administracyjnego i otwórz zakładkę "Plugins". Kliknij „Activate” przy pozycji „Transferuj.pl” 
+1.	Przejdź do panelu administracyjnego i otwórz zakładkę „Wtyczki”. Kliknij „Włącz” przy pozycji „Transferuj.pl”.
+2.	Przejdź do WooCommerce ->Ustawienia i wybierz  zakładkę „Zamówienia ” po czym z listy dostępnych metod płatności  wybierz Transferuj.pl. 
+3.	Teraz należy dokonać odpowiednich ustawień dla modułu płatności Transferuj:
+	a.	Włącz/Wyłącz – należy pozostawić zaznaczone, aby klienci mogli dokonywać płatności przez Transferuj.
+	b.	Nazwa – nazwa płatności 
+	c.	Opis - opis bramki płatności Transferuj, który widzi użytkownik przy tworzeniu zamówienia
+	d.	ID sprzedawcy – pole obowiązkowe, Twój ID otrzymany podczas zakładania konta  Transferuj.pl
+	e.	Kod bezpieczeństwa  – należy wpisać kod  ustawiony w Panelu Odbiorcy Płatności  w Transferuj.pl. Menu -> Ustawienia -> Powiadomienia -> Kod 		Bezpieczeństwa. 
+	f.	Dopłata doliczana za korzystanie z Transferuj – opcja ta pozwala doliczyć do kwoty zamówienia, opłatę  za korzystanie płatności Transferuj. Domyślnie 		wybrana jest opcja NIE pozostałe opcje:
+			PLN – należy podać kwotę jaka ma zostać doliczona do zamówienia
+			% - należy podać jaki procent z danego zamówienia zostanie doliczony do całkowitej kwoty do zapłaty.
+	g.	Kwota dopłaty – dla wybranej w poprzednim punkcie opcji:
+			PLN- kwota doliczana do zamówienia, liczby dziesiętne należy podać po kropce np.  3.50
+			% - procent jaki ma zostać doliczony z danego zamówienia do całkowitej kwoty zamówienia, liczby dziesiętne należy podać po kropce np. 2.75 
+	h.	Włącz wybór banku na stronie sklepu– dostępne opcje:
+			TAK – klient będzie dokonywał wyboru kanału płatności na stronie sklepu.
+			NIE – klient dokona wyboru kanału płatności po przejściu do Panelu Transakcyjnego Transferuj.
+	i.	Widok listy kanałów- pozwala wybrać na jakiej zasadzie mają być wyświetlane kanały płatności na stronie sprzedawcy:
+			Lista – rozwijana lista zawierająca kanały płatności.
+			Kafelki – kanały płatności wyświetlane w formie ikon z logami banków.
+		Opcja brana pod uwagę tylko z aktywną opcją h.
+4.	Następnie należy kliknąć „Zapisz zmiany”.
 
-4. Przejdź do WooCommerce ->Settings i wybierz zakładkę „Payment Gateways” po czym z poziomej listy bramek wybierz Transferuj.pl i uzupełnij formularz swoimi danymi i zapisz zmiany klikając „Savechanges”.
-
-WAŻNE – kod Bezpieczeństwa potwierdzający musi być IDENTYCZNY jak wpisany w Panelu Odbiorcy w Transferuj.pl (Menu->Ustawienia-> Powiadomienia->kod bezpieczeństwa potwierdzający). 
-
-5. Od teraz Twoi klienci będą mogli dokonywać szybkich płatności online przez system Transferuj.pl 
 
 = Testy =
 
-Przetestowany z Woocommerce 2.2, Wordpress 4.0
+Moduł był testowany na systemie zbudowanym z wersji Woocommerce 2.2.1 i Wordpress 4.1.
 
 
 = KONTAKT =
