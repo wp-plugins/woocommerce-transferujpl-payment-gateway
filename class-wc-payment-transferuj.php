@@ -10,16 +10,40 @@
  * Description: Brama płatności Transferuj.pl do WooCommerce.
  * Author: Transferuj.pl
  * Author URI: http://www.transferuj.pl
- * Version: 1.0
+ * Version: 1.1
  */
-// load plugin
-//wp_enqueue_script("jquery"); 
+
+
 add_action('plugins_loaded', 'init_transferuj_gateway');
 
 function init_transferuj_gateway() {
 
-    if (!class_exists('WC_Payment_Gateway'))
+    
+
+    
+    
+    if (!class_exists('WC_Payment_Gateway')){
+        add_action( 'admin_init', 'child_plugin_has_parent_plugin' );
+function child_plugin_has_parent_plugin() {
+    if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'woocommerce/woocommerce.php' ) ) {
+        add_action( 'admin_notices', 'child_plugin_notice' );
+
+        deactivate_plugins( plugin_basename( __FILE__ ) ); 
+
+        if ( isset( $_GET['activate'] ) ) {
+            unset( $_GET['activate'] );
+        }
+    }
+}
+
+function child_plugin_notice(){
+    ?><div class="error"><p>Moduł płatności Transferuj.pl wymaga zainstalowanej wtyczki Woocommerce, którą można pobrać <a target="blank" href="https://wordpress.org/plugins/woocommerce/">tutaj</a></p></div><?php
+}
         return;
+    }
+        
+    
+    
 
     class WC_Gateway_Transferuj extends WC_Payment_Gateway {
 
@@ -27,10 +51,21 @@ function init_transferuj_gateway() {
          * Constructor for the gateway.
          *
          * @access public
+         *
+         * 
+         * @global type $woocommerce
          */
+        
+       
+        
+        
         public function __construct() {
+          
+    // Visual Attributes is activated
+ 
             global $woocommerce;
-
+            
+            
             $this->id = __('transferuj', 'woocommerce');
             $this->icon = apply_filters('woocommerce_transferuj_icon', plugins_url('images/logo-transferuj-50x25.png', __FILE__));
             $this->has_fields = true;
@@ -45,8 +80,7 @@ function init_transferuj_gateway() {
             $this->init_form_fields();
             $this->init_settings();
 
-
-
+            
 
 
             // Define user set variables
@@ -57,10 +91,11 @@ function init_transferuj_gateway() {
             $this->security_code = $this->get_option('security_code');
             $this->bank_list = $this->get_option('bank_list');
             $this->doplata = $this->get_option('doplata');
+            $this->scroll = $this->get_option('scroll');
 
             // Actions
             add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
-
+            
             //obliczanie koszyka na nowo jesli jest doplata za Transferuj
             if ($this->doplata != 0) {
                 add_action('woocommerce_cart_calculate_fees', array($this, 'add_fee_t'), 99);
@@ -70,8 +105,11 @@ function init_transferuj_gateway() {
             add_action('woocommerce_api_wc_gateway_transferuj', array($this, 'gateway_communication'));
 
             add_filter('payment_fields', array($this, 'payment_fields'));
+         
         }
-
+       
+        
+        
         function add_fee_t() {
             //dodawanie do zamowienia oplaty za Transferuj
             if ((WC()->session->chosen_payment_method ) == 'transferuj') {
@@ -114,14 +152,24 @@ function init_transferuj_gateway() {
 
             if ($this->get_option('doplata') == 1) {
 
-                echo "<p>Za korzystanie z płatności online sprzedawca dolicza:<b> " . $this->get_option('kwota_doplaty') . " PLN</b> </p>";
+                echo "<p>Za korzystanie z płatności online sprzedawca dolicza:<b> " . $this->get_option('kwota_doplaty') . " zł</b> </p>";
             }
-
+            
             if ($this->get_option('doplata') == 2) {
                 //global $woocommerce;
                 $kwota = WC()->cart->cart_contents_total + WC()->cart->shipping_total;
                 $kwota = $kwota * ($this->get_option('kwota_doplaty')) / 100;
-                echo "<p>Za korzystanie z płatności online sprzedawca dolicza:<b> " . $kwota . " PLN</b> </p>";
+                $kwota = doubleval($kwota);
+                $kwota=  number_format($kwota,2);
+                echo "<p>Za korzystanie z płatności online sprzedawca dolicza:<b> " . $kwota . " zł</b> </p>";
+            }
+            if ($this->get_option('scroll') == 0){
+                $jQuery = '$jQuery';
+                $scroll="$jQuery('html, body').animate({ scrollTop: n }, 500)";
+            }
+            else{
+                
+                $scroll='';
             }
 
             if ($this->get_option('bank_list') == "0" && $this->get_option('bank_view') == "0") {
@@ -164,7 +212,7 @@ function init_transferuj_gateway() {
                             $jQuery(".check").removeClass("checked_v");
                             $jQuery(this).addClass("checked_v");
                             var n = $jQuery(document).height();
-                            $jQuery('html, body').animate({ scrollTop: n }, 500);
+                            $scroll
                             var kanal = 0;
                             kanal = jQuery(this).attr("id");
                              $jQuery('#channel').val(kanal);
@@ -208,7 +256,6 @@ FORM;
                             $matches['name'][$i] . "</option>";
                 }
                 $channels .= '</select>';
-            }
             // generate box
             echo <<<FORM
 			
@@ -223,6 +270,9 @@ FORM;
             <div id="channelSelectBox">{$channels}</div>
 
 FORM;
+                           
+                }
+            
         }
 
         /**
@@ -270,12 +320,26 @@ FORM;
                         if (a == "1") {
                             jQuery('label[for="woocommerce_transferuj_bank_view"]').attr("style", "visibility: hidden ")
                             jQuery("#woocommerce_transferuj_bank_view").attr("style", "visibility: hidden")
+                            jQuery('label[for="woocommerce_transferuj_scroll"]').attr("style", "visibility: hidden ")
+                            jQuery("#woocommerce_transferuj_scroll").attr("style", "visibility: hidden")
 
                         }
                         else {
                             jQuery('label[for="woocommerce_transferuj_bank_view"]').attr("style", "visibility: ")
                             jQuery("#woocommerce_transferuj_bank_view").attr("style", "visibility: ")
+                             var a = jQuery("#woocommerce_transferuj_bank_view option:selected").val();
 
+                            if (a == "1") {
+                            jQuery('label[for="woocommerce_transferuj_scroll"]').attr("style", "visibility: hidden ")
+                            jQuery("#woocommerce_transferuj_scroll").attr("style", "visibility: hidden")
+
+                              }
+                             else {
+                            jQuery('label[for="woocommerce_transferuj_scroll"]').attr("style", "visibility: ")
+                            jQuery("#woocommerce_transferuj_scroll").attr("style", "visibility: ")
+
+
+                        }    
 
                         }
 
@@ -286,6 +350,24 @@ FORM;
 
                         bank_list();
                     });
+                    
+                     jQuery("#woocommerce_transferuj_bank_view").change(function () {
+
+                        var a = jQuery("#woocommerce_transferuj_bank_view option:selected").val();
+
+                        if (a == "1") {
+                            jQuery('label[for="woocommerce_transferuj_scroll"]').attr("style", "visibility: hidden ")
+                            jQuery("#woocommerce_transferuj_scroll").attr("style", "visibility: hidden")
+
+                        }
+                        else {
+                            jQuery('label[for="woocommerce_transferuj_scroll"]').attr("style", "visibility: ")
+                            jQuery("#woocommerce_transferuj_scroll").attr("style", "visibility: ")
+
+
+                        }
+                    });
+
 
                     jQuery("#woocommerce_transferuj_doplata").change(function () {
 
@@ -331,14 +413,19 @@ FORM;
             if ($this->get_option('bank_list') == '1') {
                 $ukryj_k = 'visibility: hidden';
             }
+             if ($this->get_option('bank_view') == '1') {
+                $ukryj_s = 'visibility: hidden';
+            }
 
             $this->form_fields = array(
                 'enabled' => array(
                     'title' => __('Włącz/Wyłącz', 'woocommerce'),
                     'type' => 'checkbox',
                     'label' => __('Włącz metodę płatności przez Transferuj.pl.', 'woocommerce'),
-                    'default' => 'yes'
+                    'default' => 'yes',
+                    'description' => sprintf( __( ' <a href="%s" TARGET="_blank">Zarejestruj konto w systemie Transferuj.pl</a>.', 'woocommerce' ), 'https://secure.transferuj.pl/panel/rejestracja.html' ),
                 ),
+               
                 'title' => array(
                     'title' => __('Nazwa', 'woocommerce'),
                     'type' => 'text',
@@ -402,6 +489,23 @@ FORM;
                         '1' => __('Lista', 'woocommerce'),
                     ),
                 ),
+                'scroll' => array(
+                    'title' => __('Automatyczne przewijanie do przycisku płatności po wyborze banku ', 'woocommerce'),
+                    'type' => 'select',
+                    'default' => '0',
+					
+                    'css' => $ukryj_s,
+                    'options' => array(
+                        '0' => __('TAK', 'woocommerce'),
+                        '1' => __('NIE', 'woocommerce'),
+                    ),
+					
+                ),
+                 'documentation' => array(
+                    'title' => __('Dokumentacja techniczna', 'woocommerce'),
+                    'type'   => 'title',
+		    'description' => sprintf( __( ' <a href="%s" TARGET="_blank">Link do dokumentacji Technicznej systemu Transferuj.pl</a>.', 'woocommerce' ), 'https://transferuj.pl/dokumentacje.html' ),
+                ),
             );
         }
 
@@ -463,7 +567,7 @@ FORM;
                     $order->update_status('processing', __('Zapłacono z nadpłatą.'));
                 } else {
 
-                    $order->payment_complete();
+                    $order->update_status('processing', __('Zapłacono'));
                 }
             } else if ($status == 'failure') {
                 $order->update_status('failed', __('Zapłata nie powiodła się.'));
@@ -481,7 +585,7 @@ FORM;
             // Mark as on-hold (we will be awaiting the Transferuj.pl payment)
             $order->update_status('on-hold', __('Awaiting Transferuj.pl payment', 'woocommerce'));
             // Reduce stock levels
-            //$order->reduce_order_stock();
+            $order->reduce_order_stock();
             // Clear cart
             $woocommerce->cart->empty_cart();
             // Post data and redirect to Transferuj.pl
