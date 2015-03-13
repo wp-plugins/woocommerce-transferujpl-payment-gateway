@@ -10,7 +10,7 @@
  * Description: Brama płatności Transferuj.pl do WooCommerce.
  * Author: Transferuj.pl
  * Author URI: http://www.transferuj.pl
- * Version: 1.1
+ * Version: 1.1.2
  */
 
 
@@ -406,6 +406,7 @@ FORM;
 
             $ukryj_d = 'visibility: visible';
             $ukryj_k = 'visibility: visible';
+            $ukryj_s = 'visibility: visible';
 
             if ($this->get_option('doplata') == '0') {
                 $ukryj_d = 'visibility: hidden';

@@ -1,10 +1,10 @@
 ﻿=== WooCommerce Payment Gateway - Transferuj.pl  ===
 Contributors: transferuj.pl
 Donate link: http://transferuj.pl/
-Tags: woocommerce, transferuj, payment, polish gateway, polska brama płatności
+Tags: woocommerce, transferuj, payment, polish gateway, polska brama płatności, bramka płatności, płatności internetowe
 Requires at least: 3.0.1
-Tested up to: 4.1
-Stable tag: 1.1
+Tested up to: 4.1.1
+Stable tag: 1.1.2
 License: GPLv2 
 Accept payments from all major polish banks directly on your WooCommerce site via transferuj.pl polish payment gateway system.
 
