@@ -10,7 +10,7 @@
  * Description: Brama płatności Transferuj.pl do WooCommerce.
  * Author: Transferuj.pl
  * Author URI: http://www.transferuj.pl
- * Version: 1.1.2
+ * Version: 1.1.3
  */
 
 
@@ -92,6 +92,7 @@ function child_plugin_notice(){
             $this->bank_list = $this->get_option('bank_list');
             $this->doplata = $this->get_option('doplata');
             $this->scroll = $this->get_option('scroll');
+            $this->status = $this->get_option('status');
 
             // Actions
             add_action('woocommerce_update_options_payment_gateways_' . $this->id, array($this, 'process_admin_options'));
@@ -231,7 +232,7 @@ function child_plugin_notice(){
             <div id="descriptionBox">{$this->description}</div> <br/>
             <div id="termsCheckboxBox">
                 <input type="checkbox" id="termsCheckbox" name="terms_t">
-                    <a href="https://transferuj.pl/regulamin.pdf" target="blank">
+                    <a href="https://secure.transferuj.pl/regulamin.pdf" target="blank">
                                 Akceptuję warunki regulaminu korzystania z serwisu Transferuj.pl
                     </a>
                 </input> <br/>
@@ -262,7 +263,7 @@ FORM;
             <div id="descriptionBox">{$this->description}</div> <br/>
             <div id="termsCheckboxBox">
                 <input type="checkbox" id="termsCheckbox" name="terms_t">
-                    <a href="https://transferuj.pl/regulamin.pdf" target="blank">
+                    <a href="https://secure.transferuj.pl/regulamin.pdf" target="blank">
                                 Akceptuję warunki regulaminu korzystania z serwisu Transferuj.pl
                     </a>
                 </input> <br/>
@@ -453,6 +454,15 @@ FORM;
                     'default' => __('0', 'woocommerce'),
                     'desc_tip' => true,
                 ),
+                'status' => array(
+                    'title' => __('Status zamówienia po opłaceniu w Transferuj.pl', 'woocommerce'),
+                    'type' => 'select',
+                    'default' => '0',
+                    'options' => array(
+                        '0' => __('W trakcie realizacji', 'woocommerce'),
+                        '1' => __('Zrealizowane', 'woocommerce'),
+                    ),
+                ),
                 'doplata' => array(
                     'title' => __('Dopłata doliczana za korzystanie z Transferuj', 'woocommerce'),
                     'type' => 'select',
@@ -563,12 +573,19 @@ FORM;
          */
         function complete_payment($order_id, $status, $overpay) {
             $order = new WC_Order($order_id);
+            if($this->get_option('status')== 0){
+                $order_status='processing';
+            }
+            else{
+                $order_status='completed';
+                
+            }
             if ($status == 'success') {
                 if ($overpay) {
-                    $order->update_status('processing', __('Zapłacono z nadpłatą.'));
+                    $order->update_status($order_status, __('Zapłacono z nadpłatą.'));
                 } else {
 
-                    $order->update_status('processing', __('Zapłacono'));
+                    $order->update_status($order_status, __('Zapłacono'));
                 }
             } else if ($status == 'failure') {
                 $order->update_status('failed', __('Zapłata nie powiodła się.'));
